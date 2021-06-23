@@ -1,5 +1,6 @@
 package com.example.toycathon;
 
+import android.animation.Animator;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +16,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class QuestionsFragment extends Fragment implements View.OnClickListener {
+public class QuestionsFragment extends Fragment {
     TextView question, choice01, choice02, choice03, choice04, number;
     ImageView thumb;
     List<Questions> data;
@@ -42,7 +43,7 @@ public class QuestionsFragment extends Fragment implements View.OnClickListener 
         thumb = view.findViewById(R.id.imageView);
         number = view.findViewById(R.id.number);
         lottieAnimationView = view.findViewById(R.id.animationView);
-        lottieAnimationView.setVisibility(View.GONE);
+        lottieAnimationView.setVisibility(View.INVISIBLE);
 
         number.setText(num + numNo);
         question.setText(data.get(i).getQuestion());
@@ -52,33 +53,81 @@ public class QuestionsFragment extends Fragment implements View.OnClickListener 
         choice04.setText(data.get(i).getChoice04());
         Picasso.get().load(data.get(i).getThumb()).into(thumb);
 
+        choice01.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (choice01.getText().toString().equals(data.get(i).getCrtAns())) {
+                    lottieAnimationView.setVisibility(View.VISIBLE);
+                } else {
+                    lottieAnimationView.setAnimation(R.raw.wrong);
+                    lottieAnimationView.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        choice02.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (choice02.getText().toString().equals(data.get(i).getCrtAns())) {
+                    lottieAnimationView.setVisibility(View.VISIBLE);
+                } else {
+                    lottieAnimationView.setAnimation(R.raw.wrong);
+                    lottieAnimationView.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        choice03.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (choice03.getText().toString().equals(data.get(i).getCrtAns())) {
+                    lottieAnimationView.setVisibility(View.VISIBLE);
+                } else {
+                    lottieAnimationView.setAnimation(R.raw.wrong);
+                    lottieAnimationView.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        choice04.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (choice04.getText().toString().equals(data.get(i).getCrtAns())) {
+                    lottieAnimationView.setVisibility(View.VISIBLE);
+                } else {
+                    lottieAnimationView.setAnimation(R.raw.wrong);
+                    lottieAnimationView.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+
+        lottieAnimationView.addAnimatorListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                lottieAnimationView.setVisibility(View.INVISIBLE);
+
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+
         return view;
 
-
     }
 
-    private void checkAnswer(TextView selectedOption) {
-        if (selectedOption.getText().toString().equals(data.get(i).getCrtAns())) {
-            //correct
-        } else {
-            //incorrect
-        }
-    }
 
-    @Override
-    public void onClick(View v) {
-        if (choice01.getText().toString().equals(data.get(i).getCrtAns())) {
-            lottieAnimationView.setVisibility(View.VISIBLE);
-
-        } else if (choice02.getText().toString().equals(data.get(i).getCrtAns())) {
-            lottieAnimationView.setVisibility(View.VISIBLE);
-
-        } else if (choice03.getText().toString().equals(data.get(i).getCrtAns())) {
-            lottieAnimationView.setVisibility(View.VISIBLE);
-
-        } else {
-            lottieAnimationView.setVisibility(View.VISIBLE);
-
-        }
-    }
 }
